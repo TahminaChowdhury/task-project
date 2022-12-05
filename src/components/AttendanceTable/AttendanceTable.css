@@ -6,4 +6,7 @@
   font-weight: 600;
   font-size: 28px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

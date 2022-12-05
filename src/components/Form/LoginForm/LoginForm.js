@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './LoginForm.css';
 import img from '../../../images/istockphoto-1321277096-612x612 1.png';
 import logo from '../../../images/ultimate hrm logo-05-02 2.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch('https://test.nexisltd.com/login', {
@@ -17,7 +18,12 @@ const LoginForm = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data.access_token));
+      .then((data) => {
+        if (data) {
+          alert('You are logged in successfully');
+          navigate('/attendance');
+        }
+      });
     setFormData({ email: '', password: '' });
   };
   return (

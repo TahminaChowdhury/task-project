@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import './AttendanceTable.css';
 import { Container } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
 import logo from '../../images/ultimate hrm logo-05-02 2.png';
+import axios from 'axios';
+import Table from 'react-bootstrap/Table';
 
 const AttendanceTable = () => {
   const [tableData, setTabledata] = useState({});
+
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InRlc3QxMEBnbWFpbC5jb20iLCJGaXJzdF9uYW1lIjoidGVzdCIsIkxhc3RfbmFtZSI6InRlc3QiLCJVaWQiOiI2MzhiNmJmMWFiODBiY2I0MTU3NTFmMDYiLCJleHAiOjE2NzAxNjgzODl9.soZAxdeb8tT88ePQ7KwcIMFt9K6JD-IurO-FDYXDcCY';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InRlc3QxMEBnbWFpbC5jb20iLCJGaXJzdF9uYW1lIjoidGVzdCIsIkxhc3RfbmFtZSI6InRlc3QiLCJVaWQiOiI2MzhiNmJmMWFiODBiY2I0MTU3NTFmMDYiLCJleHAiOjE2NzAyNjI3MzR9.A43b0Tr-oUnIHhUvanLzVPYiAOr80mA4Z4dlMAwdbeg';
   useEffect(() => {
-    fetch('https://test.nexisltd.com/test', {
-      method: 'GET',
-      headers: {
-      
-        Authentication: `Bearer ${token} `,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    axios
+      .get('/https://test.nexisltd.com/test', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setTabledata(res.data))
+      .then((err) => console.log(err));
   }, []);
+
   return (
     <Container className="my-5">
       <div className="row ">
@@ -26,9 +26,28 @@ const AttendanceTable = () => {
           <div>
             <img src={logo} alt="" />
           </div>
-          <div className="d-flex justify-content-center">
-            <div className="title d-flex justify-content-center align-items-center">
-              <p>Attendance information</p>
+          <div>
+            <div className="d-flex justify-content-center my-5">
+              <p className="title">Attendance information</p>
+            </div>
+
+            <div>
+              <Table striped>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Employee Name</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </Table>
             </div>
           </div>
         </div>

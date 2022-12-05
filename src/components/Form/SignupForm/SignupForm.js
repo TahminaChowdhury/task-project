@@ -25,7 +25,11 @@ const SignupForm = () => {
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (data.success) {
+          alert('You are signed up successfully');
+        }
+      });
     setFormData({
       first_name: '',
       last_name: '',
@@ -50,10 +54,10 @@ const SignupForm = () => {
       <div className="row">
         <div className="col-sm-12 col-md-7">
           <div className="align-baseline">
-            <img src={logo} alt="" />
+            <img src={logo} className="img-fluid" alt="" />
           </div>
           <div className="d-flex justify-content-center">
-            <img src={img} alt="" />
+            <img src={img} className="img-fluid" alt="" />
           </div>
         </div>
         <div className="col-sm-12 col-md-5">

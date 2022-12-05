@@ -13,9 +13,6 @@ const Home = () => {
           <div className="d-flex justify-content-between">
             <img src={logo} className="img-fluid" alt="" />
             <div className="auth-div d-flex justify-content-between align-items-center">
-              <Link to="/attendance" className="me-2">
-                Attendance
-              </Link>
               <Link to="/login" className="me-2">
                 Login
               </Link>
