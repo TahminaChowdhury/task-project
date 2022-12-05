@@ -8,8 +8,11 @@ import Table from 'react-bootstrap/Table';
 const AttendanceTable = () => {
   const [tableData, setTabledata] = useState({});
   const [error, setError] = useState('');
+
+  // Bearer Token
   const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InRlc3QxMEBnbWFpbC5jb20iLCJGaXJzdF9uYW1lIjoidGVzdCIsIkxhc3RfbmFtZSI6InRlc3QiLCJVaWQiOiI2MzhiNmJmMWFiODBiY2I0MTU3NTFmMDYiLCJleHAiOjE2NzAyNjI3MzR9.A43b0Tr-oUnIHhUvanLzVPYiAOr80mA4Z4dlMAwdbeg';
+
   useEffect(() => {
     axios
       .get('https://test.nexisltd.com/test', {
@@ -17,7 +20,7 @@ const AttendanceTable = () => {
       })
       .then((res) => setTabledata(res.data))
       .then((err) => {
-        setError(err.message);
+        setError(err);
       });
   }, []);
 
@@ -33,6 +36,7 @@ const AttendanceTable = () => {
               <p className="title">Attendance information</p>
             </div>
 
+            {/* table */}
             <div>
               <Table>
                 <thead>
@@ -43,16 +47,16 @@ const AttendanceTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(tableData).map((key) => {
+                  {Object.keys(tableData).map((key, index) => {
                     const value = tableData[key];
                     const { attendance } = value;
                     const date = Object.keys(attendance);
                     const info = Object.values(attendance)[29];
                     return (
-                      <tr>
-                        <td>{date[29]}</td>
-                        <td>{value.name}</td>
-                        <td>{info.status}</td>
+                      <tr key={index}>
+                        <td className='py-4'>{date[29]}</td>
+                        <td className='py-4'>{value.name}</td>
+                        <td className='py-4'>{info.status}</td>
                       </tr>
                     );
                   })}

@@ -9,7 +9,9 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch('https://test.nexisltd.com/login', {
@@ -26,6 +28,7 @@ const LoginForm = () => {
       });
     setFormData({ email: '', password: '' });
   };
+  
   return (
     <div className="m-5 py-5">
       <div className="row">
