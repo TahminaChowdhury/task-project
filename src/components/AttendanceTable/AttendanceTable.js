@@ -1,29 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './AttendanceTable.css';
 import { Container } from 'react-bootstrap';
 import logo from '../../images/ultimate hrm logo-05-02 2.png';
-import axios from 'axios';
-import Table from 'react-bootstrap/Table';
+import Table from './Table';
 
 const AttendanceTable = () => {
-  const [tableData, setTabledata] = useState({});
-  const [error, setError] = useState('');
-
-  // Bearer Token
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InRlc3QxMEBnbWFpbC5jb20iLCJGaXJzdF9uYW1lIjoidGVzdCIsIkxhc3RfbmFtZSI6InRlc3QiLCJVaWQiOiI2MzhiNmJmMWFiODBiY2I0MTU3NTFmMDYiLCJleHAiOjE2NzAyNjI3MzR9.A43b0Tr-oUnIHhUvanLzVPYiAOr80mA4Z4dlMAwdbeg';
-
-  useEffect(() => {
-    axios
-      .get('https://test.nexisltd.com/test', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setTabledata(res.data))
-      .then((err) => {
-        setError(err);
-      });
-  }, []);
-
   return (
     <Container className="my-5">
       <div className="row ">
@@ -38,30 +19,7 @@ const AttendanceTable = () => {
 
             {/* table */}
             <div>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Employee Name</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(tableData).map((key, index) => {
-                    const value = tableData[key];
-                    const { attendance } = value;
-                    const date = Object.keys(attendance);
-                    const info = Object.values(attendance)[29];
-                    return (
-                      <tr key={index}>
-                        <td className='py-4'>{date[29]}</td>
-                        <td className='py-4'>{value.name}</td>
-                        <td className='py-4'>{info.status}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+              <Table />
             </div>
           </div>
         </div>

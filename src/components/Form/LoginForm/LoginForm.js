@@ -3,6 +3,7 @@ import './LoginForm.css';
 import img from '../../../images/istockphoto-1321277096-612x612 1.png';
 import logo from '../../../images/ultimate hrm logo-05-02 2.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { saveToLocalStorage } from '../../../authentication';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -22,13 +23,14 @@ const LoginForm = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data) {
+          saveToLocalStorage(data);
           alert('You are logged in successfully');
           navigate('/attendance');
         }
       });
     setFormData({ email: '', password: '' });
   };
-  
+
   return (
     <div className="m-5 py-5">
       <div className="row">
@@ -43,7 +45,7 @@ const LoginForm = () => {
         <div className="col-sm-12 col-md-5">
           <div className="form-container d-flex justify-content-center align-items-center">
             <div className="text-center form-content">
-              <h4 style={{ marginBottom: '100px' }}>Log in Form</h4>
+              <h4 style={{ marginBottom: '50px' }}>Log in Form</h4>
               <div>
                 <form onSubmit={handleSubmit}>
                   <div>
@@ -73,7 +75,7 @@ const LoginForm = () => {
                     />
                   </div>
 
-                  <button className="simple-btn" type="submit">
+                  <button className="simple-btn mt-5" type="submit">
                     Log In
                   </button>
                 </form>

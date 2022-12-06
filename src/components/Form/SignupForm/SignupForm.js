@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './SignupForm.css';
 import img from '../../../images/istockphoto-1321277096-612x612 1.png';
 import logo from '../../../images/ultimate hrm logo-05-02 2.png';
-import { Link } from 'react-router-dom';
 import SignupInfo from './SignupInfo';
 import PersonalInfo from './PersonalInfo';
 import OtherInfo from './OtherInfo';
+import { Link } from 'react-router-dom';
 
 const SignupForm = () => {
   const [page, setPage] = useState(0);
+  const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -28,6 +29,8 @@ const SignupForm = () => {
       .then((data) => {
         if (data.success) {
           alert('You are signed up successfully');
+        } else {
+          setError(data.error);
         }
       });
     setFormData({
@@ -63,9 +66,14 @@ const SignupForm = () => {
         <div className="col-sm-12 col-md-5">
           <div className="form-container d-flex justify-content-center align-items-center">
             <div className="text-center form-content">
-              <h4 style={{ marginBottom: '100px' }}>SignUp Form</h4>
+              <h4 style={{ marginBottom: '50px' }}>SignUp Form</h4>
               {componentDisplay()}
-              <div>
+              {error ? (
+                <p className="text-start text-danger my-4">Error: {error}</p>
+              ) : (
+                ''
+              )}
+              <div className="mt-5">
                 {/* Back button */}
                 {page > 0 ? (
                   <button
@@ -91,7 +99,7 @@ const SignupForm = () => {
                   {page === 0 || page === 1 ? (
                     <>
                       Next Step{' '}
-                      <i class="fa-solid fa-arrow-right-long ms-2"></i>
+                      <i className="fa-solid fa-arrow-right-long ms-2"></i>
                     </>
                   ) : (
                     'Submit'

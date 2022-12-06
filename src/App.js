@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SignupForm from './components/Form/SignupForm/SignupForm';
 import LoginForm from './components/Form/LoginForm/LoginForm';
-import AttendanceTable from './components/AttendanceTable/AttendanceTable';
+import AttendanceTable from './components/AttendanceTable/AttendanceTable'
 
 function App() {
   return (
